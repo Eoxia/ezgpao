@@ -1,0 +1,43 @@
+# Copyright (C) 2026 EVARISK <technique@evarisk.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+#
+# Module
+#
+ModuleEzGpaoName = EzGpao
+EzGpaoDescription = Simplified production management: from kits to BOMs, from sales orders to manufacturing orders
+EzGpaoDescriptionLong = Turns a kit into an autonomous bill of materials (BOM) and creates the manufacturing orders (MO) of a sales order.
+
+#
+# Kit -> BOM
+#
+EzGpaoConvertKitToBom = Convert kit into BOM
+EzGpaoConvertKitToBomHelp = Creates a validated BOM from the kit composition, then removes that composition from the product
+EzGpaoConfirmConvertKitToBom = A validated BOM will be created from the composition of kit <b>%s</b>, then the kit composition will be removed from the product. The BOM will not stay in sync with the former kit. Continue?
+EzGpaoConvertKitsToBom = Convert kits into BOMs
+EzGpaoConfirmConvertKitsToBom = A validated BOM will be created for each of the %s selected products that are kits, then their kit composition will be removed. Continue?
+EzGpaoKitConverted = Kit %s converted into BOM %s
+EzGpaoBomCreatedFromKit = BOM created from kit %s
+EzGpaoProductsNotKits = Products skipped because they are not kits: %s
+EzGpaoErrorNotAKit = Product %s is not a kit
+EzGpaoErrorProductAlreadyHasBom = Product %s already has a validated BOM (%s): the kit was not converted
+EzGpaoErrorComponentNotFound = Kit component not found (id %s)
+EzGpaoErrorKitConversion = Conversion of kit %s failed:
+
+#
+# Sales order -> manufacturing orders
+#
+EzGpaoCreateMos = Create manufacturing orders
+EzGpaoCreateMosHelp = Creates a draft manufacturing order for each line whose product has a validated BOM
+EzGpaoConfirmCreateMos = A draft manufacturing order will be created for each line of order <b>%s</b> whose product has a validated BOM, for the ordered quantity. Continue?
+EzGpaoMoLabel = Order %s - %s
+EzGpaoMosCreated = %s manufacturing order(s) created for order %s: %s
+EzGpaoLinesAlreadyCovered = Order %s: lines skipped because a manufacturing order is already linked to them: %s
+EzGpaoLinesWithoutBom = Order %s: lines skipped for lack of a validated BOM: %s
+EzGpaoNothingToManufacture = Order %s: no product line to manufacture
+EzGpaoErrorOrderNotEligible = Order %s must be validated to create its manufacturing orders
+EzGpaoErrorMoCreation = Creation of the manufacturing order of product %s failed:
