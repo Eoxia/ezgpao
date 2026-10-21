@@ -1,0 +1,43 @@
+# Copyright (C) 2026 EVARISK <technique@evarisk.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+#
+# Module
+#
+ModuleEzGpaoName = EzGpao
+EzGpaoDescription = GPAO simplifiée : des kits aux nomenclatures, des commandes aux ordres de fabrication
+EzGpaoDescriptionLong = Convertit un kit en nomenclature (BOM) autonome et crée les ordres de fabrication (OF) d'une commande client.
+
+#
+# Kit -> nomenclature
+#
+EzGpaoConvertKitToBom = Convertir le kit en nomenclature
+EzGpaoConvertKitToBomHelp = Crée une nomenclature validée à partir de la composition du kit, puis retire cette composition du produit
+EzGpaoConfirmConvertKitToBom = Une nomenclature validée va être créée à partir de la composition du kit <b>%s</b>, puis la composition du kit sera supprimée du produit. La nomenclature ne restera pas synchronisée avec l'ancien kit. Continuer ?
+EzGpaoConvertKitsToBom = Convertir les kits en nomenclatures
+EzGpaoConfirmConvertKitsToBom = Une nomenclature validée va être créée pour chacun des %s produits sélectionnés qui sont des kits, puis leur composition de kit sera supprimée. Continuer ?
+EzGpaoKitConverted = Kit %s converti en nomenclature %s
+EzGpaoBomCreatedFromKit = Nomenclature créée à partir du kit %s
+EzGpaoProductsNotKits = Produits ignorés car ce ne sont pas des kits : %s
+EzGpaoErrorNotAKit = Le produit %s n'est pas un kit
+EzGpaoErrorProductAlreadyHasBom = Le produit %s a déjà une nomenclature validée (%s) : le kit n'a pas été converti
+EzGpaoErrorComponentNotFound = Composant de kit introuvable (id %s)
+EzGpaoErrorKitConversion = Échec de la conversion du kit %s :
+
+#
+# Commande -> ordres de fabrication
+#
+EzGpaoCreateMos = Créer les ordres de fabrication
+EzGpaoCreateMosHelp = Crée un ordre de fabrication brouillon pour chaque ligne dont le produit a une nomenclature validée
+EzGpaoConfirmCreateMos = Un ordre de fabrication brouillon va être créé pour chaque ligne de la commande <b>%s</b> dont le produit a une nomenclature validée, pour la quantité commandée. Continuer ?
+EzGpaoMoLabel = Commande %s - %s
+EzGpaoMosCreated = %s ordre(s) de fabrication créé(s) pour la commande %s : %s
+EzGpaoLinesAlreadyCovered = Commande %s : lignes ignorées car un ordre de fabrication y est déjà lié : %s
+EzGpaoLinesWithoutBom = Commande %s : lignes ignorées faute de nomenclature validée : %s
+EzGpaoNothingToManufacture = Commande %s : aucune ligne de produit à fabriquer
+EzGpaoErrorOrderNotEligible = La commande %s doit être validée pour créer ses ordres de fabrication
+EzGpaoErrorMoCreation = Échec de la création de l'ordre de fabrication du produit %s :

@@ -1,0 +1,82 @@
+includes:
+    - phpstan.baseline.neon
+
+parameters:
+    phpVersion: 80100 # PHP 8.1 (CI target)
+    level: 8
+    tmpDir: .github/tmp/phpstan
+
+    bootstrapFiles:
+        - dev/phpstan/bootstrap.php
+
+    paths:
+        - .
+
+    excludePaths:
+        analyseAndScan:
+            - vendor/ (?)
+            - langs/ (?)
+            - dev/ (?)
+
+    # Fichiers isoles du coeur qui portent des fonctions utilisees par le module.
+    scanFiles:
+        # llxHeader()/llxFooter()/top_httphead() vivent dans main.inc.php
+        - ../../main.inc.php
+
+    # Scanne, sans les analyser, les classes du coeur Dolibarr que le module utilise.
+    # ezgpao ne depend pas de Saturne : il ne fait que relier des objets du coeur
+    # (kits, nomenclatures, ordres de fabrication, commandes).
+    # A garder en phase avec le sparse-checkout de .github/workflows/quality.yml.
+    # Liste derivee des include du module et des classes qu ils tirent :
+    #   grep -rhoE "DOL_DOCUMENT_ROOT *\. *['\"]/[^'\"]+" --include=*.php .
+    scanDirectories:
+        - ../../bom/class/
+        - ../../categories/class/
+        - ../../comm/action/class/
+        - ../../commande/class/
+        - ../../core/class/
+        - ../../core/db/
+        - ../../core/lib/
+        - ../../core/modules/
+        - ../../mrp/class/
+        - ../../product/class/
+        - ../../product/stock/class/
+        - ../../projet/class/
+        - ../../societe/class/
+        - ../../user/class/
+
+    # Performance
+    parallel:
+        processTimeout: 300.0
+        maximumNumberOfProcesses: 2
+
+    # Herite de la configuration de Dolibarr : reduit le bruit sur ses patterns dynamiques.
+    checkNullables: false
+    checkUnionTypes: false
+    polluteScopeWithLoopInitialAssignments: false
+    polluteScopeWithAlwaysIterableForeach: false
+    reportMaybes: false
+    reportMaybesInMethodSignatures: false
+    reportStaticMethodSignatures: false
+    reportMagicMethods: false
+    reportMagicProperties: false
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: false
+
+    universalObjectCratesClasses:
+        - stdClass
+        - SimpleXMLElement
+        # Dolibarr affecte les proprietes d'un objet dynamiquement depuis la ligne SQL.
+        - CommonObject
+
+    ignoreErrors:
+        # Dolibarr ne documente jamais le type des valeurs d'un tableau (`@return array`),
+        # donc cette erreur tomberait sur chaque nouveau fichier sans jamais pouvoir etre
+        # resorbee.
+        - identifier: missingType.iterableValue
+        - '#.*phan-var#'
+        - '#Empty array passed to foreach#'
+        - '#Unable to resolve the template type T#'
+        - '#in empty\(\) always exists and is always falsy#'
+        - '#in empty\(\) always exists and is not falsy#'
+        - '#in isset\(\) is not nullable#'
